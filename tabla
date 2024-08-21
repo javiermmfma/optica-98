@@ -1,0 +1,44 @@
+import numpy as np
+import pandas as pd
+
+# Definir valores de v1, v2, Ay, By, Bx
+v1 = 3  # Velocidad en la zona de A (m/s)
+v2 = 6  # Velocidad en la zona de B (m/s)
+Ay = 2  # Coordenada y de A (m)
+Bx = 4  # Coordenada x de B (m)
+By = 1  # Coordenada y de B (m)
+
+# Inicializar listas para almacenar datos
+x_values = []
+d1_values = []
+d2_values = []
+tiempos_values = []
+
+# Para cada x en el rango (0, Bx):
+for x in np.linspace(0, Bx, 10):  # 10 puntos entre 0 y Bx para la tabla
+    # Calcular d1 = sqrt(x^2 + Ay^2)
+    d1 = np.sqrt(x**2 + Ay**2)
+    
+    # Calcular d2 = sqrt((Bx - x)^2 + By^2)
+    d2 = np.sqrt((Bx - x)**2 + By**2)
+    
+    # Calcular t(x) = d1/v1 + d2/v2
+    tiempo = d1/v1 + d2/v2
+    
+    # Agregar valores a las listas
+    x_values.append(x)
+    d1_values.append(d1)
+    d2_values.append(d2)
+    tiempos_values.append(tiempo)
+
+# Crear un DataFrame para la tabla
+data = {
+    'x (m)': x_values,
+    'd1 (m)': d1_values,
+    'd2 (m)': d2_values,
+    'Tiempo Total (s)': tiempos_values
+}
+tabla = pd.DataFrame(data)
+
+# Mostrar la tabla
+print(tabla)
